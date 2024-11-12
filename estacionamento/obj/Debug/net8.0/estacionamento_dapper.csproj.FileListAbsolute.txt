@@ -28,3 +28,4 @@
 /home/itamar/Documentos/Programacao/ProjetoDapper/estacionamento_dapper/estacionamento/obj/Debug/net8.0/estacionamento_dapper.pdb
 /home/itamar/Documentos/Programacao/ProjetoDapper/estacionamento_dapper/estacionamento/obj/Debug/net8.0/estacionamento_dapper.genruntimeconfig.cache
 /home/itamar/Documentos/Programacao/ProjetoDapper/estacionamento_dapper/estacionamento/obj/Debug/net8.0/ref/estacionamento_dapper.dll
+/home/itamar/Documentos/Programacao/ProjetoDapper/estacionamento_dapper/estacionamento/obj/Debug/net8.0/estacionamento_dapper.sourcelink.json

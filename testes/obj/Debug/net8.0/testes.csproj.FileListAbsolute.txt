@@ -117,3 +117,4 @@
 /home/itamar/Documentos/Programacao/ProjetoDapper/estacionamento_dapper/testes/bin/Debug/net8.0/estacionamento_dapper
 /home/itamar/Documentos/Programacao/ProjetoDapper/estacionamento_dapper/testes/bin/Debug/net8.0/estacionamento_dapper.dll
 /home/itamar/Documentos/Programacao/ProjetoDapper/estacionamento_dapper/testes/bin/Debug/net8.0/estacionamento_dapper.pdb
+/home/itamar/Documentos/Programacao/ProjetoDapper/estacionamento_dapper/testes/obj/Debug/net8.0/testes.sourcelink.json
