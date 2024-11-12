@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/estacionamento_dapper.props" />
+</Project>

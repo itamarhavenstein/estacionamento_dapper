@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/estacionamento_dapper.props" />
+</Project>
