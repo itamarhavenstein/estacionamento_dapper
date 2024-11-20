@@ -5,7 +5,7 @@
 
 <div class="text-center">
     <h1 class="display-4">Valor do Minuto</h1>
-    <
+    <a class="btn btn-primary" asp-area="" asp-controller="ValorDoMinuto" asp-action="Novo">Novo</a>
 </div>
 
 <div class="text-center">
@@ -15,6 +15,8 @@
                 <th>Id</th>
                 <th>Minutos</th>
                 <th>Valor</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +24,15 @@
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Minutos</td>
-                    <td>R$ @item.Valor</td>
+                    <td>R$ @item.Valor.ToString("C", new System.Globalization.CultureInfo("pt-BR"))</td>
+                    <td>
+                        <a class="btn btn-warning" asp-route-id="@item.Id" asp-controller="ValorDoMinuto" asp-action="Editar">Alterar</a>
+                    </td>
+                    <td>
+                        <form onsubmit="return confirm('Confirma?')" asp-route-id="@item.Id" asp-action="Apagar" asp-controller="ValorDoMinuto"  method="post">
+                            <button type="submit" class="btn btn-danger">Excluir</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
