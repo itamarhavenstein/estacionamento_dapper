@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace estacionamento.Models
 {
+    [Table("tickets")]
     public class Ticket
     {
         public int Id { get; set; } = default!;

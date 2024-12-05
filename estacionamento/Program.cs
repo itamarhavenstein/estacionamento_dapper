@@ -1,4 +1,5 @@
 using System.Data;
+using estacionamento.Repositorios;
 using MySql.Data.MySqlClient;
 
 internal class Program
@@ -17,6 +18,8 @@ internal class Program
         {
             return new MySqlConnection(connectionString);
         });
+
+        builder.Services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioDapper<>));
 
         var app = builder.Build();
 
