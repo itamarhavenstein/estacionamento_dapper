@@ -16,10 +16,12 @@ namespace estacionamento.Repositorios
             _nomeTabela = ObterNomeTabela();
         }
 
-        private string ObterNomeTabela(){
+        private string ObterNomeTabela()
+        {
             var tipo = typeof(T);
             var atributoTabela = tipo.GetCustomAttribute<TableAttribute>();
-            if(atributoTabela != null){
+            if (atributoTabela != null)
+            {
                 return atributoTabela.Name;
             }
             return tipo.Name;
@@ -28,20 +30,26 @@ namespace estacionamento.Repositorios
         {
             var campos = ObterCamposUpdate(entidade);
             var sql = $"Update {_nomeTabela} Set {campos} where Id = @Id";
-            _conexao.Execute(sql,entidade);
+            _conexao.Execute(sql, entidade);
         }
 
-        public string ObterCamposUpdate(T entidade){
+        public string ObterCamposUpdate(T entidade)
+        {
             var tipo = typeof(T);
-            var propriedades = tipo.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var atualizaCampos = propriedades.Select(p => $"{p.Name} = @{p.Name}");
+            var propriedades = tipo.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                   .Where(p => !Attribute.IsDefined(p, typeof(IgnoreInDapperAttribute)));
+            var atualizaCampos = propriedades.Select(p =>
+            {
+                var colunaName = p.GetCustomAttribute<ColumnAttribute>()?.Name;
+                return $"{colunaName ?? p.Name} = @{p.Name}";
+            });
             return string.Join(", ", atualizaCampos);
         }
 
         public void Excluir(int id)
         {
             var sql = $"Delete from {_nomeTabela} where Id = @Id";
-            _conexao.Execute(sql, new{ Id = id });
+            _conexao.Execute(sql, new { Id = id });
         }
 
         public void Inserir(T entidade)
@@ -49,20 +57,32 @@ namespace estacionamento.Repositorios
             var campos = ObterCamposInsert(entidade);
             var valores = ObterValoresInsert(entidade);
             var sql = $"Insert into {_nomeTabela} ({campos}) Values ({valores})";
-            _conexao.Execute(sql,entidade);
+            _conexao.Execute(sql, entidade);
         }
 
-        public string ObterCamposInsert(T entidade){
+        public string ObterCamposInsert(T entidade)
+        {
             var tipo = typeof(T);
-            var propriedades = tipo.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var nomesCampos = propriedades.Select(p => p.Name);
+            var propriedades = tipo.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                   .Where(p => !Attribute.IsDefined(p, typeof(IgnoreInDapperAttribute)));
+            var nomesCampos = propriedades.Select(p =>
+            {
+                var colunaName = p.GetCustomAttribute<ColumnAttribute>()?.Name;
+                return colunaName ?? p.Name;
+            });
             return string.Join(", ", nomesCampos);
         }
 
-        public string ObterValoresInsert(T entidade){
+        public string ObterValoresInsert(T entidade)
+        {
             var tipo = typeof(T);
-            var propriedades = tipo.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var valoresCampos = propriedades.Select(p => $"@{p.Name}");
+            var propriedades = tipo.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                   .Where(p => !Attribute.IsDefined(p, typeof(IgnoreInDapperAttribute)));
+            var valoresCampos = propriedades.Select(p =>
+            {
+                var colunaName = p.GetCustomAttribute<ColumnAttribute>()?.Name;
+                return colunaName ?? p.Name;
+            });
             return string.Join(", ", valoresCampos);
         }
 
