@@ -8,7 +8,9 @@ namespace estacionamento.Models
     {
         [IgnoreInDapper]
         public int Id { get; set; } = default!;
-        public string? Nome { get; set; }
-        public string? Cpf { get; set; }
+        [Column("nome")]
+        public string Nome { get; set; } =  default!;
+        [Column("cpf")]
+        public string Cpf { get; set; } =  default!;
     }
 }
